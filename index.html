@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>关于感谢祭房间模拟</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	.add_btn {
+		margin-left: 8px;
+	}
+	.del_btn {
+		margin-left: 8px;
+		padding-right: 7.5px;
+		padding-left: 7.5px;
+	}
+	.input_text {
+		width: 20px;
+    	text-align: center;
+    	margin-left: 10px;
+	}
+	.idea {
+		width: 27px;
+		margin-left: 2px;
+	}
+	.target {
+		margin-top: 10px
+	}
+</style>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<body>
+<!-- 优化输入修改逻辑，参考输入支付密码 -->
+<div>
+	<img class="idea" style="margin-left: 76px" src="./vo.png">
+	<img class="idea" src="./da.png">
+	<img class="idea" src="./vi.png">
+	<img class="idea" src="./me.png">
+	<img class="idea" src="./sp.png">
+</div>
+<div id="main1" class="main">
+	<div class="ideas" style="margin-left: 18px;">
+		ideas:&nbsp<input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1">
+	</div>
+	<div class="target">
+		<label class="target-label">target-1:</label><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"> <button class="add_btn">+</button> <button class="run">RUN</button>
+	</div>
+</div>
+<div id="res">
+	
+
+</div>
+<script type="text/javascript" src="gxj.js"></script>
+<script type="text/javascript">
+
+	$('.add_btn').click(function(){
+		// alert('1');
+		main = $(this).parents('.main'); 
+		nowid = main.find('.target').length + 1
+		// console.log(main);
+		main.append('<div class="target"><label class="target-label">target-'+nowid+':</label><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"> <button class="del_btn'+nowid+'" style="margin-left: 8px;padding-right: 7.5px;padding-left: 7.5px;">-</button></div>')
+
+		// not elegant
+		$('.del_btn'+nowid).click(function(){
+			console.log($(this).parent('.target'));
+			$(this).parent('.target').remove();
+			
+		})
+	})
+	$('.run').click(function(){
+		main = $(this).parents('.main');
+		// main = $('.main')
+		ideas = []
+		main.find('.ideas input').each(function(){
+			ideas.push(parseInt($(this).val()));
+			// console.log($(this).val());
+		})
+		target_labels = []
+		targets = []
+		main.find('.target').each(function(){
+			target_div = $(this);
+			target = [];
+			target_labels.push($(this).find('.target-label').text())
+			target_div.find('input').each(function(){
+				target.push(parseInt($(this).val()));
+				// console.log($(this).val());
+			})
+			targets.push(target);
+		})
+		console.log(ideas);
+		console.log(targets);
+		console.log(target_labels);
+
+		length = targets.length;
+		$('#res').empty();
+		for(var i=0; i<length; i++){
+			ans = MC(ideas, targets[i]);
+			// console.log(ans);
+			idx = target_labels[i].slice(6)
+			$('#res').append('<p>result'+ idx +' '+ans+'</p>')
+		}
+
+	})
+</script>
+</body>
+</html>
