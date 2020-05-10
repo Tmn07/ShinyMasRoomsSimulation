@@ -5,11 +5,15 @@
 	<meta charset="utf-8">
 </head>
 <style type="text/css">
+	body {zoom:1.8;}
 	.add_btn {
-		margin-left: 8px;
+		margin-left: 6px;
+	}
+	.ha {
+		margin-left: 16px;
 	}
 	.del_btn {
-		margin-left: 8px;
+		margin-left: 6px;
 		padding-right: 7.5px;
 		padding-left: 7.5px;
 	}
@@ -35,13 +39,15 @@
 	<img class="idea" src="./vi.png">
 	<img class="idea" src="./me.png">
 	<img class="idea" src="./sp.png">
+	<!-- <img class="idea" src="./ha.png"> -->
 </div>
 <div id="main1" class="main">
-	<div class="ideas" style="margin-left: 18px;">
-		ideas:&nbsp<input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1"><input class="input_text" value="1">
+	<div class="ideas" style="margin-left: 17.8px;">
+		ideas:&nbsp<input class="input_text" value="1" maxlength="1" onfocus="this.select()"><input class="input_text" value="1" maxlength="1" onfocus="this.select()"><input class="input_text" value="1" maxlength="1" onfocus="this.select()"><input class="input_text" value="1" maxlength="1" onfocus="this.select()"><input class="input_text" value="1" maxlength="1" onfocus="this.select()">
+		<!-- <div><input class="ha" type="checkbox"></div> -->
 	</div>
 	<div class="target">
-		<label class="target-label">target-1:</label><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"> <button class="add_btn">+</button> <button class="run">RUN</button>
+		<label class="target-label">target-1:</label><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"> <button class="add_btn">+</button> <button class="run">RUN</button>
 	</div>
 </div>
 <div id="res">
@@ -50,20 +56,22 @@
 </div>
 <script type="text/javascript" src="gxj.js"></script>
 <script type="text/javascript">
+	// $('input').focus(function(){this.select()});
 
 	$('.add_btn').click(function(){
 		// alert('1');
 		main = $(this).parents('.main'); 
 		nowid = main.find('.target').length + 1
 		// console.log(main);
-		main.append('<div class="target"><label class="target-label">target-'+nowid+':</label><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"><input class="input_text" value="0"> <button class="del_btn'+nowid+'" style="margin-left: 8px;padding-right: 7.5px;padding-left: 7.5px;">-</button></div>')
-
+		main.append('<div class="target"><label class="target-label">target-'+nowid+':</label><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"><input class="input_text" value="0" maxlength="1" onfocus="this.select()"> <button class="del_btn'+nowid+'" style="margin-left: 6px;padding-right: 7.5px;padding-left: 7.5px;">-</button></div>')
+		// console.log(nowid);
+		// $($('.target')[nowid-1]).find('input').focus(function(){this.select()});
 		// not elegant
 		$('.del_btn'+nowid).click(function(){
-			console.log($(this).parent('.target'));
+			// console.log($(this).parent('.target'));
 			$(this).parent('.target').remove();
-			
 		})
+
 	})
 	$('.run').click(function(){
 		main = $(this).parents('.main');
@@ -85,9 +93,9 @@
 			})
 			targets.push(target);
 		})
-		console.log(ideas);
-		console.log(targets);
-		console.log(target_labels);
+		// console.log(ideas);
+		// console.log(targets);
+		// console.log(target_labels);
 
 		length = targets.length;
 		$('#res').empty();
